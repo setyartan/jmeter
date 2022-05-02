@@ -47,6 +47,12 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">true</boolProp>
+      </CookieManager>
+      <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -197,7 +203,7 @@
           <stringProp name="filename"></stringProp>
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="script">if(vars.get(&quot;posts_number&quot;) == null){
-	def numberList = [&quot;100&quot;, &quot;1000&quot;, &quot;2000&quot;]
+	def numberList = [&quot;1&quot;, &quot;1&quot;, &quot;2&quot;]
 	vars.put(&quot;posts_number&quot;, numberList.get(new Random().nextInt(numberList.size())))
 }</stringProp>
         </JSR223PostProcessor>
@@ -222,7 +228,7 @@
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="cacheKey">true</stringProp>
-            <stringProp name="script">vars.put(&quot;post_text&quot;, &quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. N&quot;.substring(0, Math.abs((new Random().nextInt() % (1000 - 50))) + 50))</stringProp>
+            <stringProp name="script">props.put(&quot;post_text&quot;, &quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. N&quot;.substring(0, Math.abs((new Random().nextInt() % (1000 - 50))) + 50))</stringProp>
           </JSR223PostProcessor>
           <hashTree/>
           <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Generate date" enabled="true">
@@ -231,15 +237,73 @@
             <stringProp name="filename"></stringProp>
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="script">if(Integer.parseInt(vars.get(&quot;posts_number&quot;)) == 100) {
-	def dates = [&quot;01/02/2022&quot;, &quot;02/03/2022&quot;, &quot;03/04/2022&quot;, &quot;22/01/2022&quot;, &quot;21/02/2022&quot;, &quot;24/03/2022&quot;, &quot;11/04/2022&quot;, &quot;16/02/2022&quot;, &quot;09/03/2022&quot;, &quot;05/02/2022&quot;]
-	vars.put(&quot;post_date&quot;, dates.get(new Random().nextInt(dates.size())))
+	def dates = [&quot;01/02/2022 10:19&quot;, &quot;2022-02-03 10:20&quot;, &quot;2022-03-04 10:21&quot;, &quot;2022-01-22 10:22&quot;, &quot;2022-04-23 10:23&quot;, &quot;2022-03-23 10:24&quot;, &quot;2022-04-11 10:25&quot;, &quot;2022-02-16 10:26&quot;, &quot;2022-03-09 10:27&quot;, &quot;2022-05-02 10:28&quot;]
+	props.put(&quot;post_date&quot;, dates.get(new Random().nextInt(dates.size())))
 } else {
-	def from = Date.parse(&apos;dd/MM/yyyy&apos;, &apos;01/01/2021&apos;)
-	def to = Date.parse(&apos;dd/MM/yyyy&apos;, &apos;01/01/2022&apos;)
-	vars.put(&quot;post_date&quot;, (from + new Random().nextInt(to - from + 1)).format(&apos;dd/MM/yyyy&apos;))
+	def from = Date.parse(&apos;yyyy-MM-dd hh:mm&apos;, &apos;2021-01-01 00:00&apos;)
+	def to = Date.parse(&apos;yyyy-MM-dd hh:mm&apos;, &apos;2022-01-01 00:00&apos;)
+	props.put(&quot;post_date&quot;, (from + new Random().nextInt(to - from + 1)).format(&apos;yyyy-MM-dd hh:mm&apos;))
 }</stringProp>
           </JSR223PostProcessor>
           <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create a post" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;Id&quot;: &quot;&quot;,&#xd;
+  &quot;Title&quot;: &quot;afsdf&quot;,&#xd;
+  &quot;Author&quot;: &quot;${user_name}&quot;,&#xd;
+  &quot;Content&quot;: &quot;${__P(post_text)}&quot;,&#xd;
+  &quot;DateCreated&quot;: &quot;${__P(post_date)}&quot;,&#xd;
+  &quot;Slug&quot;: &quot;sdfsdf&quot;,&#xd;
+  &quot;Categories&quot;: [],&#xd;
+  &quot;Tags&quot;: [],&#xd;
+  &quot;Comments&quot;: &quot;&quot;,&#xd;
+  &quot;HasCommentsEnabled&quot;: true,&#xd;
+  &quot;IsPublished&quot;: true&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${server_name}</stringProp>
+            <stringProp name="HTTPSampler.port">${server_port}</stringProp>
+            <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/blog/api/posts</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json;charset=UTF-8</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Code Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49587">201</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
         </hashTree>
         <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Measure data creation time" enabled="true">
           <stringProp name="scriptLanguage">groovy</stringProp>
