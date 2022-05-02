@@ -203,7 +203,7 @@
           <stringProp name="filename"></stringProp>
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="script">if(vars.get(&quot;posts_number&quot;) == null){
-	def numberList = [&quot;1&quot;, &quot;1&quot;, &quot;2&quot;]
+	def numberList = [&quot;100&quot;, &quot;1000&quot;, &quot;2000&quot;]
 	vars.put(&quot;posts_number&quot;, numberList.get(new Random().nextInt(numberList.size())))
 }</stringProp>
         </JSR223PostProcessor>
@@ -254,11 +254,11 @@
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
   &quot;Id&quot;: &quot;&quot;,&#xd;
-  &quot;Title&quot;: &quot;afsdf&quot;,&#xd;
+  &quot;Title&quot;: &quot;Title&quot;,&#xd;
   &quot;Author&quot;: &quot;${user_name}&quot;,&#xd;
   &quot;Content&quot;: &quot;${__P(post_text)}&quot;,&#xd;
   &quot;DateCreated&quot;: &quot;${__P(post_date)}&quot;,&#xd;
-  &quot;Slug&quot;: &quot;sdfsdf&quot;,&#xd;
+  &quot;Slug&quot;: &quot;Title&quot;,&#xd;
   &quot;Categories&quot;: [],&#xd;
   &quot;Tags&quot;: [],&#xd;
   &quot;Comments&quot;: &quot;&quot;,&#xd;
