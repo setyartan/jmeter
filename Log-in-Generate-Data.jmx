@@ -213,7 +213,7 @@
         </JSR223PostProcessor>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
-          <stringProp name="IfController.condition">${__javaScript(${posts_number} == 100 || ${posts_number} == 1000 || ${posts_number} == 2000)}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(${posts_number} == 100 || ${posts_number} == 1000 || ${posts_number} == 2000)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -237,7 +237,7 @@
               <stringProp name="filename"></stringProp>
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="script">if(Integer.parseInt(vars.get(&quot;posts_number&quot;)) == 100) {
-	def dates = [&quot;01/02/2022 10:19&quot;, &quot;2022-02-03 10:20&quot;, &quot;2022-03-04 10:21&quot;, &quot;2022-01-22 10:22&quot;, &quot;2022-04-23 10:23&quot;, &quot;2022-03-23 10:24&quot;, &quot;2022-04-11 10:25&quot;, &quot;2022-02-16 10:26&quot;, &quot;2022-03-09 10:27&quot;, &quot;2022-05-02 10:28&quot;]
+	def dates = [&quot;2022-02-01 10:19&quot;, &quot;2022-02-03 10:20&quot;, &quot;2022-03-04 10:21&quot;, &quot;2022-01-22 10:22&quot;, &quot;2022-04-23 10:23&quot;, &quot;2022-03-23 10:24&quot;, &quot;2022-04-11 10:25&quot;, &quot;2022-02-16 10:26&quot;, &quot;2022-03-09 10:27&quot;, &quot;2022-05-02 10:28&quot;]
 	props.put(&quot;post_date&quot;, dates.get(new Random().nextInt(dates.size())))
 } else {
 	def from = Date.parse(&apos;yyyy-MM-dd hh:mm&apos;, &apos;2021-01-01 00:00&apos;)
